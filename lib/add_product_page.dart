@@ -21,6 +21,7 @@ class _AddProductPageState extends State<AddProductPage> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController departmentController = TextEditingController();
 
   ////////////////////////////////////////////////////////////
   // ✅ Image (ใช้ XFile รองรับ Web)
@@ -56,7 +57,7 @@ class _AddProductPageState extends State<AddProductPage> {
     }
 
     final url = Uri.parse(
-      "http://localhost/flutter_student_registration/php_api/insert_product.php",
+      "http://localhost/flutter_students_register/php_api/insert_product.php",
     );
 
     var request = http.MultipartRequest('POST', url);
@@ -68,6 +69,7 @@ class _AddProductPageState extends State<AddProductPage> {
     request.fields['name'] = nameController.text;
     request.fields['email'] = emailController.text;
     request.fields['phone'] = phoneController.text;
+    request.fields['department'] = departmentController.text;
 
     ////////////////////////////////////////////////////////////
     // ✅ Upload Image (แยก Web / Mobile)
@@ -127,7 +129,7 @@ class _AddProductPageState extends State<AddProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("เพิ่มสินค้า")),
+      appBar: AppBar(title: const Text("เพิ่มนักศึกษา")),
 
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -204,6 +206,17 @@ class _AddProductPageState extends State<AddProductPage> {
                 maxLines: 3,
                 decoration: const InputDecoration(
                   labelText: "เบอร์โทรศัพท์",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              TextField(
+                controller: departmentController,
+                maxLines: 3,
+                decoration: const InputDecoration(
+                  labelText: "คณะ",
                   border: OutlineInputBorder(),
                 ),
               ),
